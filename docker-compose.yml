@@ -1,0 +1,44 @@
+version: "3.4"
+services:
+
+    # PHP service
+    app:
+        build: .
+        container_name: php8.app
+        working_dir: /var/www/
+        volumes:
+            - ./html:/var/www/html
+        networks:
+            - app-network
+
+    # MySQL database service
+    db:
+        image: mysql:5.7
+        container_name: php8.mysql-db
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        env_file:
+            - ./.env
+        networks:
+            - app-network
+
+    # Nginx service
+    nginx:
+        image: nginx:alpine
+        container_name: php8.nginx
+        ports:
+            - 8008:8008
+        volumes:
+            - ./html:/var/www/html
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
