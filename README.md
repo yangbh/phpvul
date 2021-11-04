@@ -15,7 +15,7 @@ The following three separate service containers will be used:
 - Build the app image with the following command:
 
 ```bash
-docker-compose build app
+docker-compose -p php8app build
 ```
 
 - When the build is finished, you can run the environment in background mode with:
