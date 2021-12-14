@@ -26,8 +26,10 @@ include("../sql-connections/db-creds.inc");
 
  
 
-
-$con = mysqli_connect($host,$dbuser,$dbpass,"",3307);
+var_dump($host);
+var_dump($dbuser);
+var_dump($dbpass);
+$con = mysqli_connect($host,$dbuser,$dbpass,"",3306);
 if (!$con)
   {
   die('[*]...................Could not connect to DB, check the creds in db-creds.inc: ' . mysqli_error($con));

@@ -1,13 +1,11 @@
 <?php
 
-//give your mysql connection username n password
 $dbuser ='root';
-$dbpass ='admin';
+$dbpass ='12312334';
 $dbname ="security";
-$host = '192.168.2.104';
+$host = 'db';
 $dbname1 = "challenges";
 
 
 
 ?>
-
