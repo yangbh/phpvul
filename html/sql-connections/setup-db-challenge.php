@@ -13,7 +13,7 @@ $id = $_GET['id'];
 
 // Check connection
 
-$con = mysqli_connect($host,$dbuser,$dbpass,"",3307);
+$con = mysqli_connect($host,$dbuser,$dbpass,"",3306);
 if (!$con)
 {
     echo "Failed to connect to MySQL: " . mysqli_error($con);

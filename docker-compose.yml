@@ -7,7 +7,7 @@ services:
         container_name: php8.app
         working_dir: /var/www/
         volumes:
-            - ./html:/var/www/html
+          - .:/var/www/:rw
         networks:
             - app-network
 
