@@ -13,14 +13,14 @@
 <?php
     
 //phpinfo();
-echo "song";
+//echo "song";
 echo "<br>";
 //including the Mysql connect parameters.
 $path = __DIR__ . "/../sql-connections/sqli-connect.php";
 include($path);
 var_dump("path is " . $path);
 //include("/var/www/html/sql-connections/sqli-connect.php");
-echo "song";
+//echo "song";
 echo "<br>";
 
 $hint=110;

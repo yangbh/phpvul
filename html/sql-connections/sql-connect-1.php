@@ -7,7 +7,7 @@ include("../sql-connections/db-creds.inc");
 // Check connection
 if (!$con)
 {
-    echo "Failed to connect to MySQL: " . mysql_error();
+    echo "Failed to connect to MySQL: " . mysqli_error($con);
 }
 
 

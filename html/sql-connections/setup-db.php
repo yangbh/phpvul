@@ -134,7 +134,8 @@ $sql="INSERT INTO `security`.`emails` (id, email_id) VALUES ('1', 'Dumb@dhakkan.
 //INSERT INTO `security`.`search` (search) VALUES ( 'Dumb@dhakkan.com'), ('Angel@iloveu.com'), ('Dummy@dhakkan.local'), ( 'secure@dhakkan.local'), ( 'stupid@dhakkan.local'), ( 'superman@dhakkan.local'), ( 'batman@dhakkan.local'), ( 'admin@dhakkan.com')"; 
 
 //including the Challenges DB creation file.
-include("/var/www/html/sql-connections/setup-db-challenge.php");
+$path = __DIR__ . "/../sql-connections/setup-db-challenge.php";
+include($path);
 ?>
 
 
