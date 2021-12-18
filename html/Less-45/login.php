@@ -10,8 +10,9 @@
 
 session_start();
 //including the Mysql connect parameters.
-include("../sql-connections/db-creds.inc");
-
+//include("../sql-connections/db-creds.inc");
+$path = __DIR__ . "/../sql-connections/db-creds.inc";
+include($path);
 
 
 
@@ -26,7 +27,7 @@ $con1 = mysqli_connect($host,$dbuser,$dbpass, $dbname);
    $password = $_POST["login_password"];
 
    // Check connection
-   if (mysqli_connect_errno($con1))
+   if (mysqli_connect_errno())
    {
        echo "Failed to connect to MySQL: " . mysqli_connect_error();
    }

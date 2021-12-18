@@ -33,33 +33,46 @@
 
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
+//include("../sql-connections/sql-connect.php");
+$dir = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($dir);
+//var_dump($con1);
 error_reporting(0);
-
+//var_dump($path);
 function check_input($value)
 	{
+		global $con1;
+		
 	if(!empty($value))
 		{
+			
 		// truncation (see comments)
-		$value = substr($value,0,15);
+		$value = substr($value,0,20);
 		}
 
 		// Stripslashes if magic quotes enabled
-		if (get_magic_quotes_gpc())
+	/*	if (get_magic_quotes_gpc())
 			{
 			$value = stripslashes($value);
 			}
-
+*/
+//$value = stripslashes($value);
 		// Quote if not a number
+		//$check = mysqli_real_escape_string($con1, $value);
+		//$test = "UPDATE users SET password = '$check'";
 		if (!ctype_digit($value))
 			{
-			$value = "'" . mysql_real_escape_string($value) . "'";
+				
+				//var_dump($con1);
+			$value = "'" . mysqli_real_escape_string($con1, $value) . "'";
 			}
 		
 	else
 		{
+			
 		$value = intval($value);
 		}
+		
 	return $value;
 	}
 
@@ -67,11 +80,16 @@ function check_input($value)
 if(isset($_POST['uname']) && isset($_POST['passwd']))
 
 {
+	//var_dump($_POST['uname']);
+	
 //making sure uname is not injectable
-$uname=check_input($_POST['uname']);  
-
+$uname=check_input($_POST['uname']); 
+//$uname=$_POST['uname'];
+echo "uname is" . $uname;
 $passwd=$_POST['passwd'];
 
+//$passwd="3242";
+//var_dump($uname);
 
 //logging the connection parameters to a file for analysis.
 $fp=fopen('result.txt','a');
@@ -81,26 +99,30 @@ fclose($fp);
 
 
 // connectivity 
-@$sql="SELECT username, password FROM users WHERE username= $uname LIMIT 0,1";
-
-$result=mysql_query($sql);
-$row = mysql_fetch_array($result);
-//echo $row;
+$sql="SELECT username, password FROM users WHERE username= $uname LIMIT 0,1";
+//echo $sql;
+$result=mysqli_query($con1, $sql);
+var_dump("after mysqli_query");
+$row = mysqli_fetch_array($result);
+var_dump("after mysqli_fetch_array");
 	if($row)
 	{
   		//echo '<font color= "#0000ff">';	
-		$row1 = $row['username'];  	
-		//echo 'Your Login name:'. $row1;
+		$row1 = $row['username'];
+		//$row1 = "admin";  
+		echo 'Your Login name:'. $row1;
 		$update="UPDATE users SET password = '$passwd' WHERE username='$row1'";
-		mysql_query($update);
+		echo $update;
+		$result=mysqli_query($con1, $update);
+		echo $result;
   		echo "<br>";
 	
 	
 	
-		if (mysql_error())
+		if (mysqli_error($con1))
 		{
 			echo '<font color= "#FFFF00" font size = 3 >';
-			print_r(mysql_error());
+			print_r(mysqli_error());
 			echo "</br></br>";
 			echo "</font>";
 		}
@@ -128,8 +150,8 @@ $row = mysql_fetch_array($result);
 	
 		echo "</font>";  
 	}
-}
 
+}
 ?>
 
 

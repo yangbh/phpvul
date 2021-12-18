@@ -1,2 +1,5 @@
 .docker
-.env
+.DS_Store
+result.txt
+*.swp
+

@@ -12,8 +12,9 @@
 
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sqli-connect.php");
-
+//include("../sql-connections/sqli-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 
 // take the variables 
 if(isset($_GET['id']))

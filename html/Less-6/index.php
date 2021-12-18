@@ -12,7 +12,9 @@
 
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
+//include("../sql-connections/sql-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 error_reporting(0);
 // take the variables
 if(isset($_GET['id']))
@@ -27,8 +29,8 @@ fclose($fp);
 
 $id = '"'.$id.'"';
 $sql="SELECT * FROM users WHERE id=$id LIMIT 0,1";
-$result=mysql_query($sql);
-$row = mysql_fetch_array($result);
+$result=mysqli_query($sql);
+$row = mysqli_fetch_array($result);
 
 	if($row)
 	{

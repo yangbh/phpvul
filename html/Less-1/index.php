@@ -12,7 +12,9 @@
 
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
+
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 error_reporting(0);
 // take the variables 
 if(isset($_GET['id']))
@@ -24,11 +26,15 @@ fwrite($fp,'ID:'.$id."\n");
 fclose($fp);
 
 // connectivity 
+//show result
+//$id= blacklist($id);
+$hint=$id;
 
+echo "id is " . $id;
 
 $sql="SELECT * FROM users WHERE id='$id' LIMIT 0,1";
-$result=mysql_query($sql);
-$row = mysql_fetch_array($result);
+$result=mysqli_query($sql);
+$row = mysqli_fetch_array($result);
 
 	if($row)
 	{
@@ -46,10 +52,24 @@ $row = mysql_fetch_array($result);
 	}
 }
 	else { echo "Please input the ID as parameter with numeric value";}
-
+	function blacklist($id)
+	{
+		$id= preg_replace('/or/i',"", $id);			//strip out OR (non case sensitive)
+		$id= preg_replace('/AND/i',"", $id);		//Strip out AND (non case sensitive)
+		
+		return $id;
+	}
 ?>
 </font> </div></br></br></br><center>
-<img src="../images/Less-1.jpg" /></center>
+<img src="../images/Less-1.jpg" />
+</br>
+</br>
+<font size='4' color= "#33FFFF">
+<?php
+echo "Hint: Your Input is Filtered with following result: ".$hint;
+?>
+</font> 
+</center>
 </body>
 </html>
 

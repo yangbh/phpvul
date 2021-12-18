@@ -39,8 +39,9 @@
 
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
-
+//include("../sql-connections/sql-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 
 // take the variables
 if(isset($_POST['uname']) && isset($_POST['passwd']))
@@ -64,10 +65,10 @@ if(isset($_POST['uname']) && isset($_POST['passwd']))
         //echo "Input password after addslashes is : ".$passwd;    
 
 	// connectivity 
-	mysql_query("SET NAMES gbk");
+	mysqli_query($con1, "SET NAMES gbk");
 	@$sql="SELECT username, password FROM users WHERE username='$uname' and password='$passwd' LIMIT 0,1";
-	$result=mysql_query($sql);
-	$row = mysql_fetch_array($result);
+	$result=mysqli_query($con1, $sql);
+	$row = mysqli_fetch_array($result);
 
 	if($row)
 	{
@@ -93,7 +94,7 @@ if(isset($_POST['uname']) && isset($_POST['passwd']))
 	{
 		echo '<font color= "#0000ff" font size="3">';
 		//echo "Try again looser";
-		print_r(mysql_error());
+		print_r(mysqli_error($con1));
 		echo "</br>";
 		echo "</br>";
 		echo "</br>";

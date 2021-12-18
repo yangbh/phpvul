@@ -37,7 +37,9 @@
 
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
+//include("../sql-connections/sql-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 error_reporting(0);
 
 // take the variables
@@ -55,8 +57,8 @@ if(isset($_POST['uname']) && isset($_POST['passwd']))
 
 	// connectivity 
 	@$sql="SELECT username, password FROM users WHERE username='$uname' and password='$passwd' LIMIT 0,1";
-	$result=mysql_query($sql);
-	$row = mysql_fetch_array($result);
+	$result=mysqli_query($sql);
+	$row = mysqli_fetch_array($result);
 
 	if($row)
 	{

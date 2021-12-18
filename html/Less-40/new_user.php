@@ -1,6 +1,8 @@
 
 <?php
-include '../sql-connections/sql-connect.php' ;
+//include '../sql-connections/sql-connect.php' ;
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >

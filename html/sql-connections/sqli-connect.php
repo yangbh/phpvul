@@ -1,16 +1,14 @@
 <?php
 
 //including the Mysql connect parameters.
-include("../sql-connections/db-creds.inc");
+$path = __DIR__ . "/../sql-connections/db-creds.inc";
+include($path);
+error_reporting(0);
 
 //mysql connections for stacked query examples.
-$con1 = mysqli_connect($host,$dbuser,$dbpass,$dbname, 3306);
-
-var_dump($host);
-var_dump($dbuser);
-var_dump($dbpass);
-var_dump($dbname);
-
+$con1 = mysqli_connect($host,$dbuser,$dbpass,$dbname,3306);
+//var_dump($host,$dbuser,$dbpass,$dbname);
+//var_dump($con1);
 // Check connection
 if (mysqli_connect_errno())
 {

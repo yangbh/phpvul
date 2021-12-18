@@ -6,7 +6,9 @@ if (isset($_SESSION['username']) && isset($_COOKIE['Auth'])) {
 ?>
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
+//include("../sql-connections/sql-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <html>
@@ -20,7 +22,7 @@ include("../sql-connections/sql-connect.php");
 <form name="login" method="POST" action="login.php">
 
 <h2 style="text-align:center;background-image:url('../images/Less-43.jpg');background-repeat:no-repeat;background-position:center center">
-<div style="padding-top:300px;text-align:center;color:#FFFF00;"><?php echo $form_title_in; ?></div>
+<div style="padding-top:300px;text-align:center;color:#FFFF00;"><?php echo "form_title_in"; ?></div>
 </h2>
 
 <div align="center">

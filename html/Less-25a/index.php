@@ -11,29 +11,44 @@
 
 
 <?php
+    
+//phpinfo();
+//echo "song";
+echo "<br>";
 //including the Mysql connect parameters.
-include("../sql-connections/sqli-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
+var_dump("path is " . $path);
+//include("/var/www/html/sql-connections/sqli-connect.php");
+//echo "song";
+echo "<br>";
 
-
+$hint=110;
 // take the variables
+//echo "GET is";
+//echo $_GET;
 if(isset($_GET['id']))
 {
+echo "GET id is " . $_GET['id'];
 $id=$_GET['id'];
 //logging the connection parameters to a file for analysis.
 $fp=fopen('result.txt','a');
-fwrite($fp,'ID:'.$id."\n");
+fwrite($fp,'ID:'.$id);
 fclose($fp);
 
+//	echo "id is" . $id;
 	//fiddling with comments
 	$id= blacklist($id);
 	//echo "<br>";
 	//echo $id;
 	//echo "<br>";
+//	echo "id is" . $id;
 	$hint=$id;
 
 // connectivity 
 $sql="SELECT * FROM users WHERE id=$id LIMIT 0,1";
 $result=mysqli_query($con1,$sql);
+var_dump($con1);
 $row = mysqli_fetch_array($result);
 
 	if($row)
