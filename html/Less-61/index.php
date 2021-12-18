@@ -19,8 +19,12 @@
 
 <?php
 //including the Mysql connect parameters.
-include '../sql-connections/sql-connect-1.php';
-include '../sql-connections/functions.php';
+//include '../sql-connections/sql-connect-1.php';
+//include '../sql-connections/functions.php';
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
+$path_func = __DIR__ . "/../sql-connections/functions.php";
+include($path_func);
 error_reporting(0);
 $pag = $_SERVER['PHP_SELF']; //generating page address to piggy back after redirects...
 $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; //characterset for generating random data
@@ -95,8 +99,8 @@ if(!isset($_POST['answer_key']))
 			
 			// Querry DB to get the correct output
 			$sql="SELECT * FROM security.users WHERE id=(('$id')) LIMIT 0,1";
-			$result=mysql_query($sql);
-			$row = mysql_fetch_array($result);
+			$result=mysqli_query($con1, $sql);
+			$row = mysqli_fetch_array($result);
 
 			if($row)
 			{
@@ -111,7 +115,7 @@ if(!isset($_POST['answer_key']))
 			else 
 			{
 				echo '<font color= "#FFFF00">';
-				print_r(mysql_error());
+				print_r(mysqli_error($con1));
 				echo "</font>";  
 			}
 		}
@@ -146,14 +150,14 @@ else
 {
 	echo '<div  style=" color:#00FFFF; font-size:18px; text-align:center">';
 	$key = addslashes($_POST['key']);
-	$key = mysql_real_escape_string($key);
+	$key = mysqli_real_escape_string($con1, $key);
 	//echo $key;
 	//Query table to verify your result
 	$sql="SELECT 1 FROM $table WHERE $col1= '$key'";
 	//echo "$sql";
-	$result=mysql_query($sql)or die("error in submittion of Key Solution".mysql_error());
+	$result=mysqli_query($con1, $sql)or die("error in submittion of Key Solution".mysqli_error($con1));
 	 
-	$row = mysql_fetch_array($result);
+	$row = mysqli_fetch_array($result);
 	
 	if($row)
 	{

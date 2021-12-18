@@ -1,6 +1,8 @@
 <?php
 error_reporting(0);
-include("../sql-connections/db-creds.inc");
+//include("../sql-connections/db-creds.inc");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -30,9 +32,10 @@ fclose($fp);
 
 // connectivity
 //mysql connections for stacked query examples.
+//$con1 = mysqli_connect($host,$dbuser,$dbpass,$dbname,3306);
 $con1 = mysqli_connect($host,$dbuser,$dbpass,$dbname);
 // Check connection
-if (mysqli_connect_errno($con1))
+if (mysqli_connect_errno())
 {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
@@ -48,10 +51,10 @@ $sql="SELECT * FROM users WHERE id='$id' LIMIT 0,1";
 if (mysqli_multi_query($con1, $sql))
 {
     
-    
     /* store first result set */
     if ($result = mysqli_store_result($con1))
     {
+        var_dump($result);
         if($row = mysqli_fetch_row($result))
         {
             echo '<font size = "5" color= "#00FF00">';	
@@ -61,8 +64,17 @@ if (mysqli_multi_query($con1, $sql))
             echo "<br>";
             echo "</font>";
         }
+        else
+        {
+            echo "mysqli_fetch_row no result";
+        }
 //            mysqli_free_result($result);
     }
+    else
+    {
+        echo "mysqli_store_result no result";
+    }
+
         /* print divider */
     if (mysqli_more_results($con1))
     {

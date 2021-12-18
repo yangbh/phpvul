@@ -10,7 +10,9 @@
 <font size="3" color="#FFFF00">
 
 <?php
-include("../sql-connections/sql-connect.php");
+//include("../sql-connections/sql-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 $id=$_GET['sort'];	
 if(isset($id))
 	{
@@ -20,7 +22,7 @@ if(isset($id))
 	fclose($fp);
 
 	$sql = "SELECT * FROM users ORDER BY '$id'";
-	$result = mysql_query($sql);
+	$result = mysqli_query($con1, $sql);
 	if ($result)
 		{
 		?>
@@ -36,7 +38,7 @@ if(isset($id))
 		</font>
 		</font>
 		<?php
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 			{
 			echo '<font color= "#00FF11" size="3">';		
 			echo "<tr>";
@@ -52,7 +54,7 @@ if(isset($id))
 	else
 		{
 		echo '<font color= "#FFFF00">';
-		print_r(mysql_error());
+		print_r(mysqli_error($con1));
 		echo "</font>";  
 		}
 	}	

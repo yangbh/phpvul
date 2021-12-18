@@ -19,8 +19,9 @@ if (!isset($_COOKIE["Auth"]))
 <?php
 
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
-
+//include("../sql-connections/sql-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 
 
 if (isset($_POST['submit']))
@@ -36,7 +37,7 @@ if (isset($_POST['submit']))
 	if($pass==$re_pass)
 	{	
 		$sql = "UPDATE users SET PASSWORD='$pass' where username='$username' and password='$curr_pass' ";
-		$res = mysql_query($sql) or die('You tried to be smart, Try harder!!!! :( ');
+		$res = mysql_query($con1, $sql) or die('You tried to be smart, Try harder!!!! :( ');
 		$row = mysql_affected_rows();
 		echo '<font size="3" color="#FFFF00">';
 		echo '<center>';

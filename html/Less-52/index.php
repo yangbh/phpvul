@@ -10,7 +10,10 @@
 <font size="3" color="#FFFF00">
 
 <?php
-include("../sql-connections/sqli-connect.php");
+//include("../sql-connections/sqli-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
+
 error_reporting(0);
 $id=$_GET['sort'];	
 if(isset($id))

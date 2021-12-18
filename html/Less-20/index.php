@@ -9,13 +9,15 @@
 <body bgcolor="#000000">
 <?php
 //including the Mysql connect parameters.
-	include("../sql-connections/sql-connect.php");
+	//include("../sql-connections/sql-connect.php");
+	$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 	error_reporting(0);
 if(!isset($_COOKIE['uname']))
 	{
 	//including the Mysql connect parameters.
-	include("../sql-connections/sql-connect.php");
-
+	//include("../sql-connections/sql-connect.php");
+	include($path);
 	echo "<div style=' margin-top:20px;color:#FFF; font-size:24px; text-align:center'> Welcome&nbsp;&nbsp;&nbsp;<font color='#FF0000'> Dhakkan </font><br></div>";
 	echo "<div  align='center' style='margin:20px 0px 0px 510px;border:20px; background-color:#0CF; text-align:center;width:400px; height:150px;'>";
 	echo "<div style='padding-top:10px; font-size:15px;'>";
@@ -46,17 +48,19 @@ if(!isset($_COOKIE['uname']))
 	
 function check_input($value)
 	{
+		global $con1;
 	if(!empty($value))
 		{
 		$value = substr($value,0,20); // truncation (see comments)
 		}
-		if (get_magic_quotes_gpc())  // Stripslashes if magic quotes enabled
+	/*	if (get_magic_quotes_gpc())  // Stripslashes if magic quotes enabled
 			{
 			$value = stripslashes($value);
 			}
+			*/
 		if (!ctype_digit($value))   	// Quote if not a number
 			{
-			$value = "'" . mysql_real_escape_string($value) . "'";
+			$value = "'" . mysqli_real_escape_string($con1 ,$value) . "'";
 			}
 	else
 		{
@@ -80,8 +84,8 @@ function check_input($value)
 
 		
 		$sql="SELECT  users.username, users.password FROM users WHERE users.username=$uname and users.password=$passwd ORDER BY users.id DESC LIMIT 0,1";
-		$result1 = mysql_query($sql);
-		$row1 = mysql_fetch_array($result1);
+		$result1 = mysqli_query($con1 ,$sql);
+		$row1 = mysqli_fetch_array($result1);
 		$cookee = $row1['username'];
 			if($row1)
 				{
@@ -94,7 +98,7 @@ function check_input($value)
 				//echo 'Your Cookie is: ' .$cookee;
 				echo "</font>";
 				echo "<br>";
-				print_r(mysql_error());			
+				print_r(mysqli_error($con1));			
 				echo "<br><br>";
 				echo '<img src="../images/flag.jpg" />';
 				echo "<br>";
@@ -103,7 +107,7 @@ function check_input($value)
 				{
 				echo '<font color= "#0000ff" font size="3">';
 				//echo "Try again looser";
-				print_r(mysql_error());
+				print_r(mysqli_error($con1));
 				echo "</br>";			
 				echo "</br>";
 				echo '<img src="../images/slap.jpg" />';	
@@ -145,12 +149,12 @@ else
 			
 			echo "<br></font>";
 			$sql="SELECT * FROM users WHERE username='$cookee' LIMIT 0,1";
-			$result=mysql_query($sql);
+			$result=mysqli_query($con1, $sql);
 			if (!$result)
   				{
-  				die('Issue with your mysql: ' . mysql_error());
+  				die('Issue with your mysql: ' . mysqli_error($con1));
   				}
-			$row = mysql_fetch_array($result);
+			$row = mysqli_fetch_array($result);
 			if($row)
 				{
 			  	echo '<font color= "pink" font size="5">';	

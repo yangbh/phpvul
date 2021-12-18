@@ -1,6 +1,8 @@
 <?php
 error_reporting(0);
-include("../sql-connections/db-creds.inc");
+$path = __DIR__ . "/../sql-connections/db-creds.inc";
+include($path);
+//include("../sql-connections/db-creds.inc");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,7 +34,7 @@ fclose($fp);
 //mysql connections for stacked query examples.
 $con1 = mysqli_connect($host,$dbuser,$dbpass,$dbname);
 // Check connection
-if (mysqli_connect_errno($con1))
+if (mysqli_connect_errno())
 {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }

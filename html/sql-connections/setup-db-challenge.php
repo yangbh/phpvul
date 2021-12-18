@@ -4,7 +4,7 @@
 <body bgcolor="#000000">
 <?php
 //including the Mysql connect parameters
-include '../sql-connections/db-creds.inc';
+include '/var/www/html/sql-connections/db-creds.inc';
 
 @error_reporting(0);
 if(isset($_GET['id']))

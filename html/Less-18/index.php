@@ -31,11 +31,14 @@
 
 <?php
 //including the Mysql connect parameters.
-include("../sql-connections/sql-connect.php");
+//include("../sql-connections/sql-connect.php");
+$path = __DIR__ . "/../sql-connections/sqli-connect.php";
+include($path);
 error_reporting(0);
 	
 function check_input($value)
 	{
+		global $con1;
 	if(!empty($value))
 		{
 		// truncation (see comments)
@@ -43,15 +46,15 @@ function check_input($value)
 		}
 
 		// Stripslashes if magic quotes enabled
-		if (get_magic_quotes_gpc())
+	/*	if (get_magic_quotes_gpc())
 			{
 			$value = stripslashes($value);
 			}
-
+*/
 		// Quote if not a number
 		if (!ctype_digit($value))
 			{
-			$value = "'" . mysql_real_escape_string($value) . "'";
+			$value = "'" . mysqli_real_escape_string($con1, $value) . "'";
 			}
 		
 	else
@@ -67,6 +70,7 @@ function check_input($value)
 	$IP = $_SERVER['REMOTE_ADDR'];
 	echo "<br>";
 	echo 'Your IP ADDRESS is: ' .$IP;
+	echo 'Your HTTP_USER_AGENT is: ' .$uagent;
 	echo "<br>";
 	//echo 'Your User Agent is: ' .$uagent;
 // take the variables
@@ -95,13 +99,13 @@ if(isset($_POST['uname']) && isset($_POST['passwd']))
 	
 	
 	$sql="SELECT  users.username, users.password FROM users WHERE users.username=$uname and users.password=$passwd ORDER BY users.id DESC LIMIT 0,1";
-	$result1 = mysql_query($sql);
-	$row1 = mysql_fetch_array($result1);
+	$result1 = mysqli_query($con1, $sql);
+	$row1 = mysqli_fetch_array($result1);
 		if($row1)
 			{
 			echo '<font color= "#FFFF00" font size = 3 >';
 			$insert="INSERT INTO `security`.`uagents` (`uagent`, `ip_address`, `username`) VALUES ('$uagent', '$IP', $uname)";
-			mysql_query($insert);
+			mysqli_query($con1, $insert);
 			//echo 'Your IP ADDRESS is: ' .$IP;
 			echo "</font>";
 			//echo "<br>";
@@ -109,7 +113,7 @@ if(isset($_POST['uname']) && isset($_POST['passwd']))
 			echo 'Your User Agent is: ' .$uagent;
 			echo "</font>";
 			echo "<br>";
-			print_r(mysql_error());			
+			print_r(mysqli_error($con1));			
 			echo "<br><br>";
 			echo '<img src="../images/flag.jpg"  />';
 			echo "<br>";
@@ -119,7 +123,7 @@ if(isset($_POST['uname']) && isset($_POST['passwd']))
 			{
 			echo '<font color= "#0000ff" font size="3">';
 			//echo "Try again looser";
-			print_r(mysql_error());
+			print_r(mysqli_error($con1));
 			echo "</br>";			
 			echo "</br>";
 			echo '<img src="../images/slap.jpg"   />';	
