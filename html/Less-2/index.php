@@ -32,7 +32,7 @@ fclose($fp);
 
 // connectivity 
 $sql="SELECT * FROM users WHERE id=$id LIMIT 0,1";
-$result=mysqli_query($sql);
+$result=mysqli_query($con1,$sql);
 $row = mysqli_fetch_array($result);
 
 	if($row)
@@ -46,7 +46,7 @@ $row = mysqli_fetch_array($result);
 	else 
 	{
 	echo '<font color= "#FFFF00">';
-	print_r(mysql_error());
+	print_r(mysqli_error($con1));
 	echo "</font>";  
 	}
 }

@@ -85,7 +85,7 @@ if(isset($_POST['uname']) && isset($_POST['passwd']))
 //making sure uname is not injectable
 $uname=check_input($_POST['uname']); 
 //$uname=$_POST['uname'];
-echo "uname is" . $uname;
+//echo "uname is" . $uname;
 $passwd=$_POST['passwd'];
 
 //$passwd="3242";
@@ -102,19 +102,19 @@ fclose($fp);
 $sql="SELECT username, password FROM users WHERE username= $uname LIMIT 0,1";
 //echo $sql;
 $result=mysqli_query($con1, $sql);
-var_dump("after mysqli_query");
+//var_dump("after mysqli_query");
 $row = mysqli_fetch_array($result);
-var_dump("after mysqli_fetch_array");
+//var_dump("after mysqli_fetch_array");
 	if($row)
 	{
   		//echo '<font color= "#0000ff">';	
 		$row1 = $row['username'];
 		//$row1 = "admin";  
-		echo 'Your Login name:'. $row1;
+		//echo 'Your Login name:'. $row1;
 		$update="UPDATE users SET password = '$passwd' WHERE username='$row1'";
-		echo $update;
+		//echo $update;
 		$result=mysqli_query($con1, $update);
-		echo $result;
+		//echo $result;
   		echo "<br>";
 	
 	
