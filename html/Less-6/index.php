@@ -29,7 +29,7 @@ fclose($fp);
 
 $id = '"'.$id.'"';
 $sql="SELECT * FROM users WHERE id=$id LIMIT 0,1";
-$result=mysqli_query($sql);
+$result=mysqli_query($con1,$sql);
 $row = mysqli_fetch_array($result);
 
 	if($row)
@@ -43,7 +43,7 @@ $row = mysqli_fetch_array($result);
 	{
 	
 	echo '<font size="3"  color= "#FFFF00">';
-	print_r(mysql_error());
+	print_r(mysqli_error($con1));
 	echo "</br></font>";	
 	echo '<font color= "#0000ff" font size= 3>';	
 	

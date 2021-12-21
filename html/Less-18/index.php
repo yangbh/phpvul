@@ -69,7 +69,7 @@ function check_input($value)
 	$uagent = $_SERVER['HTTP_USER_AGENT'];
 	$IP = $_SERVER['REMOTE_ADDR'];
 	echo "<br>";
-	echo 'Your IP ADDRESS is: ' .$IP;
+	echo 'Your IP ADDRESS is: ' .$IP . '<br>';
 	echo 'Your HTTP_USER_AGENT is: ' .$uagent;
 	echo "<br>";
 	//echo 'Your User Agent is: ' .$uagent;

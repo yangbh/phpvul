@@ -31,7 +31,7 @@ fclose($fp);
 
 
 $sql="SELECT * FROM users WHERE id=(('$id')) LIMIT 0,1";
-$result=mysqli_query($sql);
+$result=mysqli_query($con1,$sql);
 $row = mysqli_fetch_array($result);
 
 	if($row)
@@ -45,7 +45,7 @@ $row = mysqli_fetch_array($result);
 	{
 	echo '<font color= "#FFFF00">';
 	echo 'You have an error in your SQL syntax';
-	//print_r(mysql_error());
+	print_r(mysqli_error($con1));
 	echo "</font>";  
 	}
 }
