@@ -25,16 +25,16 @@ RUN docker-php-ext-install pdo_mysql mbstring  mysqli \
 
 SHELL ["/bin/bash", "-c"]
 
-# COPY php-agent.tar.gz /tmp/php-agent.tar.gz
-# COPY .env .
-# RUN source .env && \
-#     cd /tmp && \
-#     tar -zxvf /tmp/php-agent.tar.gz && \
-#     mv /tmp/php-agent/dongtai_php_agent.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/ && \
-#     sed -i "s/home\/vagrant/tmp/" /tmp/php-agent/dongtai-php-property.ini && \
-#     sed -i "s/mydev/${DongTai_Server}/" /tmp/php-agent/dongtai-php-property.ini && \
-#     sed -i "s/76826a0ec74a23daf8dda4ad4c44eb68adba0a53/${DongTai_Token}/" /tmp/php-agent/dongtai-php-property.ini && \
-#     mv /tmp/php-agent/dongtai-php-property.ini /usr/local/etc/php/conf.d/
+COPY php-agent.tar.gz /tmp/php-agent.tar.gz
+COPY .env .
+RUN source .env && \
+    cd /tmp && \
+    tar -zxvf /tmp/php-agent.tar.gz && \
+    mv /tmp/php-agent/dongtai_php_agent.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/ && \
+    sed -i "s/home\/vagrant/tmp/" /tmp/php-agent/dongtai-php-property.ini && \
+    sed -i "s/mydev/${DongTai_Server}/" /tmp/php-agent/dongtai-php-property.ini && \
+    sed -i "s/76826a0ec74a23daf8dda4ad4c44eb68adba0a53/${DongTai_Token}/" /tmp/php-agent/dongtai-php-property.ini && \
+    mv /tmp/php-agent/dongtai-php-property.ini /usr/local/etc/php/conf.d/
 
 
 # Set working directory
