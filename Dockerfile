@@ -10,10 +10,6 @@ RUN docker-php-ext-install pdo_mysql mbstring  mysqli \
 
 
 # install php agent for DongTai IAST
-
-RUN echo "DongTai_Server :${DongTai_Server}"
-RUN echo "DongTai_Token :${DongTai_Token}"
-
 SHELL ["/bin/bash", "-c"]
 
 COPY php-agent.tar.gz /tmp/php-agent.tar.gz
