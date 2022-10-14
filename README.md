@@ -1,3 +1,4 @@
+
 # PHP 8 development environment with PHP-FPM, Nginx and MySQL, using Docker and Docker Compose
 
 You need to have Docker and Docker Compose installed on your server to proceed using this PHP environment.
@@ -11,6 +12,13 @@ The following three separate service containers will be used:
 ## Running the environment
 
 - Set the MySQL environment variables creating a `.env` file based on the `.env.example` file.
+
+- Set DongTai IAST url and token in `.env`
+
+```ini
+DongTai_Server=xxx
+DongTai_Token=xxx
+```
 
 - Build the app image with the following command:
 
