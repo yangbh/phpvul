@@ -20,7 +20,6 @@ RUN docker-php-ext-install pdo_mysql mbstring  mysqli \
 #     apt update && \
 #     apt install -y gcc-9 && \
 #     apt install -y libstdc++6 
-
 # RUN apt install -y vim 
 
 SHELL ["/bin/bash", "-c"]
@@ -35,7 +34,6 @@ RUN source .env && \
     sed -i "s/mydev/${DongTai_Server}/" /tmp/php-agent/dongtai-php-property.ini && \
     sed -i "s/76826a0ec74a23daf8dda4ad4c44eb68adba0a53/${DongTai_Token}/" /tmp/php-agent/dongtai-php-property.ini && \
     mv /tmp/php-agent/dongtai-php-property.ini /usr/local/etc/php/conf.d/
-
 
 # Set working directory
 WORKDIR /var/www
