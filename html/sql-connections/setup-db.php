@@ -26,8 +26,6 @@ $path = __DIR__ . "/../sql-connections/db-creds.inc";
 include($path);
 #include("/var/www/html/sql-connections/db-creds.inc");
 
- 
-
 
 $con = mysqli_connect($host,$dbuser,$dbpass,"",3306);
 if (!$con)
