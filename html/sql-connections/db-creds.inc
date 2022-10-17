@@ -1,10 +1,10 @@
 <?php
 
-$dbuser ='root';
-$dbpass ='12312334';
-$dbname ="security";
-$host = 'db';
-$dbname1 = "challenges";
+$dbuser = getenv("DB_USERNAME");
+$dbpass = getenv("DB_PASSWORD");
+$dbname = getenv("DB_DATABASE");
+$host = getenv("DB_HOST");
+$dbname1 = getenv("DB_DATABASE");
 
 
 
